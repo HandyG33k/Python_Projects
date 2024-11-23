@@ -6,26 +6,16 @@ target_port = input("What port would you like to target?: ")
 target_port2 = int(target_port)
 
 # Create a socket object
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-# Connecting to the client 
-client.connect((target_host, target_port2))
+client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 # Sending data to the host
 data_send = input("What data would you like to send to the server?: ")
-client.send(data_send.encode())
+client.sendto(data_send.encode(), (target_host, target_port2))
 
 # Receive the response
-response = client.recv(4096)
-
-# While loop to read data till the server disconnects
-#response = b""
-#while True:
-#    info = client.recv(4096)
-#    if not info:
-#        break
-#    response += info
+data, addr = client.recvfrom(4096)
 
 # Print out the response
 print(response.decode())
 client.close()
+
