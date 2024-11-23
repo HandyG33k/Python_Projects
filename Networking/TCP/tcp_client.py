@@ -13,18 +13,13 @@ client.connect((target_host, target_port2))
 
 # Sending data to the host
 data_send = input("What data would you like to send to the server?: ")
-client.send(data_send.encode())
+data_send = data_send.replace(r"\r\n", "\r\n")
+data_send2 = data_send.encode()
+
+client.send(data_send2)
 
 # Receive the response
 response = client.recv(4096)
-
-# While loop to read data till the server disconnects
-#response = b""
-#while True:
-#    info = client.recv(4096)
-#    if not info:
-#        break
-#    response += info
 
 # Print out the response
 print(response.decode())
