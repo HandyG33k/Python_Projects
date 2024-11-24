@@ -16,6 +16,6 @@ client.sendto(data_send.encode(), (target_host, target_port2))
 data, addr = client.recvfrom(4096)
 
 # Print out the response
-print(response.decode())
+print(data.decode())
 client.close()
 
